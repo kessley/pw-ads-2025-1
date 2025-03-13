@@ -56,8 +56,8 @@
     */
 
     const Pessoa = ({ nome, sobrenome, dia, mes, ano }) => {
-      // Calcula a idade ao final do ano de 2025
-      const idade = 2025 - ano;
+
+      const idade = 2025 - ano
       
       return (
         <>
@@ -65,18 +65,17 @@
           <p className="cor2">{dia}/{mes}/{ano}</p>
           <div className="idade">Idade ao final do ano: {idade}</div>
         </>
-      );
-    };
+      )
+    }
 
-    // Exemplo de uso do componente Pessoa com props
     const container = (
       <>
         <Pessoa nome="kessley" sobrenome="ramos" dia={30} mes={5} ano={1997} />
       </>
     );
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(container);
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(container)
   </script>
   
 </body>
