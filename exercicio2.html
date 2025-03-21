@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function Form() {
+      let nome, maiusc
+
+      // Criando referências para os elementos
+      // As referências serão usadas no lugar dos ids
+      const valorRealRef = React.useRef()
+      const contacaoDolarRef = React.useRef()
+      const resultadoRef = React.useRef()
+
+      function handleChange(event) {
+        resultadoRef.current.textContent = valorRealRef.current.value / contacaoDolarRef.current.value
+      }
+
+      return <>
+        <h1>Formulário React</h1>
+        <form>
+          <div>
+            <label>
+              <span>Valor em real:</span><br />
+              <input type="number" ref={valorRealRef} onChange={handleChange} />
+            </label>
+          </div>
+          <div>
+            <label>
+                <span>Cotacao do dolar</span><br />
+              <input type="number" ref={contacaoDolarRef} onChange={handleChange} />
+            </label>
+          </div>
+          <span>Dinheiro em dolar: </span>
+          <div ref={resultadoRef} />
+          
+        </form>
+      </>
+    }
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<Form />)
+  </script>
+</body>
+</html>
