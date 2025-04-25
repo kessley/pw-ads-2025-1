@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Moedas</title>
+</head>
+<body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function Form() {
+      const [valorReais, setValorReais] = React.useState('');
+      const [cotacaoDolar, setCotacaoDolar] = React.useState('');
+      const [resultado, setResultado] = React.useState('');
+
+      function handleChange(event) {
+        const { name, value } = event.target;
+        
+        // Atualiza o estado do input correspondente
+        if (name === 'valorReais') {
+          setValorReais(value);
+        } else if (name === 'cotacaoDolar') {
+          setCotacaoDolar(value);
+        }
+        
+        // Calcula a conversão usando os valores atuais (convertendo para número)
+        const reais = parseFloat(name === 'valorReais' ? value : valorReais) || 0;
+        const cotacao = parseFloat(name === 'cotacaoDolar' ? value : cotacaoDolar) || 0;
+        
+        if (cotacao !== 0) {
+          setResultado((reais / cotacao).toFixed(2));
+        } else {
+          setResultado('');
+        }
+      }
+
+      return (
+        <>
+          <h1>Conversor de Moedas</h1>
+          <form>
+            <div>
+              <label>
+                <span>Valor em reais:</span><br />
+                <input 
+                  type="number" 
+                  name="valorReais" 
+                  value={valorReais} 
+                  onChange={handleChange} 
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                <span>Cotação do dólar:</span><br />
+                <input 
+                  type="number" 
+                  name="cotacaoDolar" 
+                  value={cotacaoDolar} 
+                  onChange={handleChange} 
+                />
+              </label>
+            </div>
+            <div>
+              <strong>Resultado:</strong> {resultado}
+            </div>
+          </form>
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<Form />);
+  </script>
+</body>
+</html>
